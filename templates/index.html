@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+    <title>weather App</title>
+</head>
+<style>
+      *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: sans-serif;
+}
+
+body{
+     min-height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: rgb(0, 0, 0);
+}
+
+.container{
+
+width: 400px;
+height: min-content;
+background-color: rgb(144, 184, 185);
+border-radius: 12px;
+padding: 28px;
+}
+.search-box{
+
+width: 100%;
+height: min-content;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.search-box input{
+
+  width: 84%;
+  font-size: 20px;
+  text-transform: capitalize;
+  color: black;
+  background-color: rgb(255, 255, 255);
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+.search-box  button:active{
+
+  color: blue;
+}
+
+.search-box input::placeholder{
+color: black;
+}
+.search-box button{
+
+width: 46px;
+height: 46px;
+background-color: white;
+border-radius: 50px;
+cursor: pointer;
+font-size: 20px;
+}
+
+.search-box button:hover{
+
+background-color: rgb(180, 154, 154);
+}
+.textbox > img{
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.textbox img:hover {
+    transform: scale(1.05);
+}
+
+.weather-box{
+    display: flex;
+    flex-direction: row;
+
+}
+
+</style>
+<body>
+    <div class="container">
+
+        <form action="{{'/weather/'}}" method="get">
+            <div class="search-box">
+                <input type="text" name="city" id="cityInput" class="input-box" placeholder="Enter city" required />
+                <button type="submit" id="searchbtn" class="fa-solid fa-magnifying-glass"></button>
+            </div>
+        
+            <div class="textbox">
+                {% if data %}
+                    {% for i in data %}
+                    
+                    {% if 'clear' in i.weather|lower %}
+                    <img src="{{ url_for('static', filename='clear_img.png') }}" alt="Clear">
+                    {% elif 'cloud' in i.weather|lower %}
+                    <img src="{{ url_for('static', filename='cloudy_img.png') }}" alt="Cloudy">
+                    {% elif 'rain' in i.weather|lower %}
+                    <img src="{{ url_for('static', filename='rain_img.png') }}" alt="Rain">
+                    {% endif %}
+                    {% if i.city and i.temperature and i.weather %}
+                        <div class="weather-box">
+                            <p><strong>City:</strong> {{ i.city }}</p>
+                            <p><strong>Temperature:</strong> {{ i.temperature }}</p>
+                            <p><strong>Weather:</strong> {{ i.weather }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
+            
+        </form>
+    </div>
+    
+</body>
+</html>
+
+
