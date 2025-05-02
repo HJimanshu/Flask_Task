@@ -32,7 +32,7 @@ Method: GET
 
 URL: http://127.0.0.1:8800/weather/
 
-# Params:
+** Params:**
   key: city
   value: {city_name}
 
