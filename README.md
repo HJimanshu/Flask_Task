@@ -31,6 +31,7 @@ This repository contains my assignment task implementation. Below, I have explai
 Method: GET
 
 URL: http://127.0.0.1:8800/weather/
+
 **NOTE:** You can test the APIs using tools like Postman and others. I've added comments in the file to guide you.
 Since the current API is integrated with templates (i.e., it returns HTML using render_template), tools like Postman are not suitable for testing this directly, as they won't display the API data properly.
 To test the API locally using tools like Postman, uncomment the function provided below in the file.
